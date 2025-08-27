@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
-
-  has_many :products, foreign_key: :owner_id , dependent: :destroy
-  has_many :selected_products , foreign_key: :cutomer_id, dependent: :destroy
+  has_one :my_shop ,class_name: "Shop", foreign_key: :owner_id #each owner has one shop
+  has_many :products, through: :shop 
+  has_many :selected_products , foreign_key: :customer_id, dependent: :destroy
   has_many :weekly_plans, foreign_key: :customer_id, dependent: :destroy 
+  has_and_belongs_to_many :shops, join_table: "shops_users"
+  validates :email, uniqueness: true
 end
