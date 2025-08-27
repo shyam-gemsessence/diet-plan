@@ -1,32 +1,36 @@
-<h1 class="plan-title">My Weekly Plan</h1>
+<h1 class="plan-title">My Weekly Plans</h1>
 
-<% if @plans.any? %>
-  <% plan_period = @plans.first %>
-  <p class="plan-duration">
-    Plan Duration: <strong><%= plan_period.start_date.strftime("%d %b %Y") %></strong> to
-    <strong><%= plan_period.end_date.strftime("%d %b %Y") %></strong>
-  </p>
+<% if @plans_by_shop.any? %>
+  <% @plans_by_shop.each do |shop, plans| %>
+    <div class="shop-plan-block">
+      <h2 class="shop-name">Plan from <%= shop.name %></h2>
 
-  <table class="weekly-plan-table">
-    <thead>
-      <tr>
-        <th>Delivery Date</th>
-        <th>Product</th>
-        <th>Quantity (KG)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @plans.order(:delivery_date).each do |plan| %>
-        <% product = Product.find(plan.product_id) %>
-        <tr>
-          <td><%= plan.delivery_date.strftime("%A, %d %B %Y") %></td>
-          <td><%= product.name %></td>
-          <td><%= plan.quantity %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+      <% plan_period = plans.first %>
+      <p class="plan-duration">
+        Plan Duration: <strong><%= plan_period.start_date.strftime("%d %b %Y") %></strong> to
+        <strong><%= plan_period.end_date.strftime("%d %b %Y") %></strong>
+      </p>
 
+      <table class="weekly-plan-table">
+        <thead>
+          <tr>
+            <th>Delivery Date</th>
+            <th>Product</th>
+            <th>Quantity (KG)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% plans.sort_by(&:delivery_date).each do |plan| %>
+            <tr>
+              <td><%= plan.delivery_date.strftime("%A, %d %B %Y") %></td>
+              <td><%= plan.product.name %></td>
+              <td><%= plan.quantity %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
 <% else %>
   <p class="no-plan-msg">You have no plans scheduled this week.</p>
 <% end %>

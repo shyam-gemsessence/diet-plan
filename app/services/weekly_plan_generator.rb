@@ -22,10 +22,10 @@ class WeeklyPlanGenerator
     end
 
     product_day_map = {}
-    product_ids = product_customer_map.keys.shuffle # random order for fairness
+    product_ids = product_customer_map.keys.shuffle 
 
     product_ids.each_with_index do |pid, index|
-      product_day_map[pid] = @days[index % 7] # spread across the week
+      product_day_map[pid] = @days[index % 7] 
     end
 
     @customers.each do |customer|

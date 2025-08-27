@@ -5,13 +5,20 @@ class UsersController < ApplicationController
 	end
 
   def create
-      @user = User.create(user_params)
+    
+    @user = User.create(user_params)
 
-			if @user.persisted?
-				redirect_to customers_dashboard_path, notice: "Thanks for signing up!"
-			else
-				render :new , status: :unprocessable_entity 
-	    end
+    if @user.persisted?
+      if @user.role == "owner"
+        session[:user_id] = @user.id
+        redirect_to new_shop_path(owner_id: @user.id), notice: "Welcome, Owner! Please register your shop."
+      else
+        redirect_to shops_path, notice: "Thanks for signing up!"
+      end
+    else
+      render :new, status: :unprocessable_entity
+    end
+
   end
 
 

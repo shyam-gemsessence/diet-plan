@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  resources :weekly_plans
-  resources :products
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -10,15 +9,24 @@ Rails.application.routes.draw do
     # Defines the root path route ("/")
   # root "posts#index"
 
-
-
-  resources :users
-  resources :session, only: [:create, :new , :destroy]
-
-  namespace :customers do
-    get 'dashboard', to: 'dashboards#index'
-    resources :diet_plans, only: [:new, :create, :edit, :update]
-    get 'weekly_plan', to: 'plans#show'
-  end
+  delete 'logout', to: 'sessions#destroy'
   
+  resources :users
+  resources :sessions, only: [:create, :new ]
+
+  resources :shops, only: [:index, :show, :new, :create ]
+  
+
+  namespace :customer do
+    get 'view_plan', to: 'dashboard#view_plan'
+    resources :selected_products, only: [:create]
+  end
+
+  namespace :owner do
+    get 'customers', to: 'dashboard#customers'
+    post 'generate_plan', to: 'dashboard#generate_plan'
+    get 'report', to: 'dashboard#report'
+    get 'shop', to: 'dashboard#shop'
+    resources :products, only: [:create, :destroy]
+  end
 end
