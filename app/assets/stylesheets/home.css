@@ -1,0 +1,86 @@
+/* Welcome Page Styles */
+
+.welcome-container {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 30px;
+  text-align: center;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+.welcome-title {
+  font-size: 32px;
+  color: #2d3436;
+  margin-bottom: 10px;
+}
+
+.welcome-subtitle {
+  font-size: 18px;
+  color: #636e72;
+  margin-bottom: 40px;
+}
+
+.role-selection {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.role-card {
+  border: 1px solid #dfe6e9;
+  padding: 25px 20px;
+  width: 300px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.role-card:hover {
+  transform: translateY(-5px);
+}
+
+.role-title {
+  font-size: 22px;
+  color: #0984e3;
+  margin-bottom: 10px;
+}
+
+.role-description {
+  font-size: 15px;
+  color: #2d3436;
+  margin-bottom: 20px;
+}
+
+/* Button Styles */
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  font-size: 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #00b894;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #019875;
+}
+
+.btn-secondary {
+  background-color: #dfe6e9;
+  color: #2d3436;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #b2bec3;
+}

@@ -1,0 +1,72 @@
+/* Sign In Page Styles */
+
+.signin-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  font-family: 'Helvetica Neue', sans-serif;
+  text-align: center;
+}
+
+.signin-title {
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #2d3436;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #2d3436;
+}
+
+.form-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #dfe6e9;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
+
+.form-input:focus {
+  border-color: #0984e3;
+  background-color: #ffffff;
+  outline: none;
+}
+
+/* Reusing button styles from previous pages */
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #00b894;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #019875;
+}

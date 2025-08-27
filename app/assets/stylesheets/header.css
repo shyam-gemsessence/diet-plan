@@ -1,0 +1,16 @@
+.simple-header {
+  background-color: #00b894;
+  padding: 18px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.12);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.simple-logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 0;
+}
