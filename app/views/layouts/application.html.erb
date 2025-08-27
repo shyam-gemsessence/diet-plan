@@ -11,6 +11,17 @@
   </head>
 
   <body>
+    
+    <header class="simple-header">
+      <div class="simple-header-left">
+        <h1 class="simple-logo">Fresh Basket</h1>
+      </div>
+    </header>
+
+    <% flash.each do |message| %>
+      <p class="flash-message"><%= message %></p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

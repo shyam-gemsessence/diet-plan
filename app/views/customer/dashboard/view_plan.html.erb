@@ -1,0 +1,32 @@
+<h1 class="plan-title">My Weekly Plan</h1>
+
+<% if @plans.any? %>
+  <% plan_period = @plans.first %>
+  <p class="plan-duration">
+    Plan Duration: <strong><%= plan_period.start_date.strftime("%d %b %Y") %></strong> to
+    <strong><%= plan_period.end_date.strftime("%d %b %Y") %></strong>
+  </p>
+
+  <table class="weekly-plan-table">
+    <thead>
+      <tr>
+        <th>Delivery Date</th>
+        <th>Product</th>
+        <th>Quantity (KG)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @plans.order(:delivery_date).each do |plan| %>
+        <% product = Product.find(plan.product_id) %>
+        <tr>
+          <td><%= plan.delivery_date.strftime("%A, %d %B %Y") %></td>
+          <td><%= product.name %></td>
+          <td><%= plan.quantity %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+  <p class="no-plan-msg">You have no plans scheduled this week.</p>
+<% end %>

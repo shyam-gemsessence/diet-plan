@@ -1,23 +1,26 @@
-<h1>Welcome to Fresh Basket!</h1>
+<div class="welcome-container">
+  <h1 class="welcome-title">Welcome to Fresh Basket!</h1>
+  <p class="welcome-subtitle">Please select your role to continue:</p>
 
-<p>Please select your role to continue:</p>
+  <div class="role-selection">
+    <!-- Customer Section -->
+    <div class="role-card">
+      <h2 class="role-title">I'm a Customer</h2>
+      <p class="role-description">
+        Choose your weekly diet and get fresh items delivered!
+      </p>
+      <%= link_to 'Customer Login', new_session_path(role: 'customer'), class: 'btn btn-primary' %><br><br>
+      <%= link_to 'Register as Customer', new_user_path(role: 'customer'), class: 'btn btn-secondary' %>
+    </div>
 
-<div style="display: flex; gap: 40px; margin-top: 30px;">
-
-  <!-- Customer Section -->
-  <div style="border: 1px solid #ccc; padding: 20px; width: 300px;">
-    <h2>I'm a Customer</h2>
-    <p>Choose your weekly diet and get fresh items delivered!</p>
-    <%= link_to 'Customer Login', new_session_path(role: 'customer'), class: 'btn btn-primary' %><br><br>
-    <%= link_to 'Register as Customer', new_user_path(role: 'customer'), class: 'btn btn-secondary' %>
+    <!-- Shop Owner Section -->
+    <div class="role-card">
+      <h2 class="role-title">I'm a Shop Owner</h2>
+      <p class="role-description">
+        Manage your shop and fulfill weekly orders.
+      </p>
+      <%= link_to 'Shop Owner Login', new_session_path(role: 'owner'), class: 'btn btn-primary' %><br><br>
+      <%= link_to 'Register as Shop Owner', new_user_path(role: 'owner'), class: 'btn btn-secondary' %>
+    </div>
   </div>
-
-  <!-- Shop Owner Section -->
-  <div style="border: 1px solid #ccc; padding: 20px; width: 300px;">
-    <h2>I'm a Shop Owner</h2>
-    <p>Manage your shop and fulfill weekly orders.</p>
-    <%= link_to 'Shop Owner Login', new_session_path(role: 'owner'), class: 'btn btn-primary' %><br><br>
-    <%= link_to 'Register as Shop Owner', new_user_path(role: 'owner'), class: 'btn btn-secondary' %>
-  </div>
-
 </div>

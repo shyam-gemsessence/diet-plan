@@ -1,0 +1,11 @@
+<header class="customer-header">
+  <div class="header-left">
+    <h1 class="logo">Fresh Basket</h1>
+  </div>
+
+  <nav class="header-right">
+    <%= link_to "All Shops", shops_path, class: "nav-link" %>
+    <%= link_to "My Plan", customer_view_plan_path, class: "nav-link" %>
+    <%= button_to "Sign Out",logout_path, method: :delete, class: "nav-link logout-btn" %>
+  </nav>
+</header>

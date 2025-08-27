@@ -1,0 +1,10 @@
+<h1>Welcome, <%= @current_user.name %></h1>
+
+<ul>
+  <li><%= link_to "Customer List", owner_customers_path %></li>
+  <li>
+    <%= button_to "Generate Weekly Plan", owner_generate_plan_path, method: :post, data: { confirm: "Are you sure?" } %>
+  </li>
+  <li><%= link_to "Weekly Purchase Report", owner_report_path %></li>
+  <li><%= link_to "Manage My Shop", owner_shop_path %></li>
+</ul>

@@ -1,0 +1,34 @@
+<div class="shop-management">
+  <h2 class="shop-title">Manage Your Shop: <%= @shop.name %></h2>
+
+  <div class="product-section">
+    <h3 class="section-title">Products</h3>
+    <ul class="product-list">
+      <% @products.each do |product| %>
+        <li class="product-item">
+          <span class="product-name"><%= product.name %></span>
+          <span class="product-category">(Category: <%= product.category %>)</span>
+          <%= button_to "Delete", owner_product_path(product), method: :delete, data: { confirm: "Sure?" }, class: "delete-btn" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="add-product-section">
+    <h3 class="section-title">Add New Product</h3>
+    <%= form_with model: @new_product, url: owner_products_path, html: { class: "product-form" } do |f| %>
+      <div class="form-group">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, class: "form-input" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :category %><br>
+        <%= f.select :category, ["fruit", "vegetable"], {}, class: "form-select" %>
+      </div>
+
+      <%= f.submit "Add Product", class: "submit-btn" %>
+    <% end %>
+  </div>
+</div>
+

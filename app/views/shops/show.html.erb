@@ -1,0 +1,20 @@
+<!-- app/views/shops/show.html.erb or similar -->
+
+<div class="shop-selection-page">
+  <h1 class="shop-title"><%= @shop.name %></h1>
+
+  <%= form_with url: customer_selected_products_path, method: :post, html: { class: "product-selection-form" } do %>
+    <div id="product-selections" class="product-list">
+      <% @products.each_with_index do |product, index| %>
+        <div class="product-option">
+          <%= check_box_tag "product_ids[]", product.id, false, id: "product_#{index}", class: "product-checkbox" %>
+          <%= label_tag "product_#{index}", product.name, class: "product-label" %>
+          <%= hidden_field_tag :shop_id, @shop.id %>
+          <%= number_field_tag "quantities[#{product.id}]", nil, placeholder: "Quantity", min: 1, class: "quantity-field" %>
+        </div>
+      <% end %>
+    </div>
+
+    <%= submit_tag "Submit Selections", class: "btn btn-primary submit-btn", data: { disable_with: "Submitting..." } %>
+  <% end %>
+</div>

@@ -1,0 +1,24 @@
+<header class="owner-dashboard-header">
+  <div class="owner-header-left">
+    <h1 class="owner-logo">Fresh Basket</h1>
+  </div>
+
+  <nav class="owner-header-nav">
+    <ul class="owner-nav-list">
+      <li><%= link_to "Customer List", owner_customers_path, class: "owner-nav-link" %></li>
+      <li>
+        <%= button_to "Generate Weekly Plan", owner_generate_plan_path,
+                      method: :post,
+                      data: { confirm: "Are you sure?" },
+                      class: "owner-nav-link owner-generate-btn" %>
+      </li>
+      <li><%= link_to "Weekly Purchase Report", owner_report_path, class: "owner-nav-link" %></li>
+      <li><%= link_to "Manage My Shop", owner_shop_path, class: "owner-nav-link" %></li>
+      <li>
+        <%= button_to "Sign Out", logout_path, method: :delete, class: "owner-nav-link owner-logout-btn" %>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+

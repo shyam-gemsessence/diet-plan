@@ -1,0 +1,15 @@
+<div class="shop-list">
+  <% @shops.each do |shop| %>
+    <div class="shop-card">
+      <div class="shop-info">
+        <h3 class="shop-name">
+          <%= link_to shop.name, shop_path(shop), class: 'shop-link' %>
+        </h3>
+        <p class="shop-owner">Owner: <%= shop.owner.name %></p>
+      </div>
+      <div class="shop-action">
+        <%= button_to "Create Plan", shop_path(shop), method: :get, class: "create-plan-btn" %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,19 @@
+<!-- app/views/reports/weekly.html.erb (example path) -->
+<div class="weekly-report">
+  <h2 class="report-title">Weekly Purchase Report</h2>
+
+  <% @summary.group_by { |(date, _), _| date }.each do |date, entries| %>
+    <div class="report-day">
+      <h3 class="report-date"><%= date.strftime('%A, %d %B %Y') %></h3>
+      <ul class="report-list">
+        <% entries.each do |(_, product_id), quantity| %>
+          <% product = Product.find(product_id) %>
+          <li class="report-item">
+            Buy <span class="quantity"><%= quantity %> KG</span> <span class="product-name"><%= product.name %></span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+
