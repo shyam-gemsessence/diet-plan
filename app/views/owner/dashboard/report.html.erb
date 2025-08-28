@@ -1,18 +1,60 @@
+<!-- app/views/shops/report.html.erb -->
+
 <div class="weekly-report">
   <h2 class="report-title">Weekly Purchase Report</h2>
 
   <% @summary_by_date.each do |date, entries| %>
     <div class="report-day">
       <h3 class="report-date"><%= date.strftime('%A, %d %B %Y') %></h3>
+
       <ul class="report-list">
         <% entries.each do |((_, product_id), quantity)| %>
           <% product = Product.find(product_id) %>
           <li class="report-item">
-            Buy <span class="quantity"><%= quantity %> KG</span> <span class="product-name"><%= product.name %></span>
+            Buy <span class="quantity"><%= quantity %> KG</span> 
+            <span class="product-name"><%= product.name %></span>
           </li>
         <% end %>
       </ul>
+
+      <button type="button" class="toggle-breakdown-btn" data-date="<%= date %>">
+        See Breakdown
+      </button>
+
+      <div class="day-breakdown" id="breakdown-<%= date %>" style="display: none;">
+        <% plans = @plans_by_date[date] || [] %>
+        <% plans.group_by(&:customer).each do |customer, customer_plans| %>
+          <strong><%= customer.name %></strong>
+          <ul>
+            <% customer_plans.each do |plan| %>
+             <li>
+                <%= plan.product.name %><%= "**" if customer.selected_products.exists?(product_id: plan.product.id )%> :
+                <%= plan.quantity %> KG
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".toggle-breakdown-btn");
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const date = button.dataset.date;
+        const section = document.getElementById(`breakdown-${date}`);
+        if (section.style.display === "none") {
+          section.style.display = "block";
+          button.textContent = "Hide Breakdown";
+        } else {
+          section.style.display = "none";
+          button.textContent = "See Breakdown";
+        }
+      });
+    });
+  });
+</script>

@@ -23,12 +23,18 @@ class Owner::DashboardController < ApplicationController
   def report
     @shop = current_user.my_shop
 
-    summary = WeeklyPlan.where(product_id: @shop.products.ids)
+    # Summary for each product per date
+    summary = WeeklyPlan.includes(:product)
+                        .where(shop_id: @shop.id)
                         .group(:delivery_date, :product_id)
                         .sum(:quantity)
 
-    # Explicitly group by delivery date for easy view rendering
-    @summary_by_date = summary.group_by { |(date, _product_id), _| date }
+    @summary_by_date = summary.group_by { |(date, _), _| date }
+
+    # Detailed breakdown for toggled view (includes customer & product)
+    @plans_by_date = WeeklyPlan.includes(:customer, :product)
+                              .where(shop_id: @shop.id)
+                              .group_by(&:delivery_date)
   end
 
 
