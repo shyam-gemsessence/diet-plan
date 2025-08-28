@@ -8,7 +8,11 @@
         <p class="shop-owner">Owner: <%= shop.owner.name %></p>
       </div>
       <div class="shop-action">
-        <%= button_to "Create Plan", shop_path(shop), method: :get, class: "create-plan-btn" %>
+        <% if shop.selected_products.where(customer_id: current_user.id ).exists? %>
+              <%= button_to "view plan", customer_view_plan_path, method: :get, class: "create-plan-btn" %>
+        <% else %>
+              <%= button_to "Create Plan", shop_path(shop), method: :get, class: "create-plan-btn" %>
+        <% end %>
       </div>
     </div>
   <% end %>

@@ -4,7 +4,7 @@ class WeeklyPlanGenerator
   def initialize(owner)
     @shop = owner.my_shop
     @owner = owner
-    @customers = @shop.customers.where(role: "customer")
+    @customers = @shop.customers
     @days = (Date.today.beginning_of_week..Date.today.end_of_week).to_a
   end
 

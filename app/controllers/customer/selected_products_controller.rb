@@ -5,7 +5,7 @@ class Customer::SelectedProductsController < ApplicationController
   def create
     
     #check if customer has already selected product from this shop
-
+    
     @shop = Shop.find( params[:shop_id] )
     if @shop.selected_products.where(customer_id: current_user.id ).exists?
       redirect_to shops_path, alert: "You already have a plan from this shop."
@@ -21,22 +21,22 @@ class Customer::SelectedProductsController < ApplicationController
       return
     end 
     
-    # map shop to the customer
-    @user = current_user
-    @user.shops << @shop
-    @user.save
-
-
+  
     ActiveRecord::Base.transaction do
+      # 1. Map shop to the customer
+      current_user.shops << @shop unless current_user.shops.include?(@shop)
+
+      # 2. Create selected products
       product_ids.each do |product_id|
         SelectedProduct.create!(
-          customer_id: @user.id,
-          shop_id: @shop.id, 
+          customer_id: current_user.id,
+          shop_id: @shop.id,
           product_id: product_id,
           quantity: quantities[product_id].to_i
         )
       end
     end
+
     shop = Shop.find( params[:shop_id] )
     result = WeeklyPlanGenerator.new(shop.owner).generate
 
