@@ -23,7 +23,7 @@
           <% plans.sort_by(&:delivery_date).each do |plan| %>
             <tr>
               <td><%= plan.delivery_date.strftime("%A, %d %B %Y") %></td>
-              <td><%= plan.product.name %></td>
+              <td><%= plan.product.name %><%= "**" if @customer.selected_products.exists?(product_id: plan.product.id )%> </td>
               <td><%= plan.quantity %></td>
             </tr>
           <% end %>
